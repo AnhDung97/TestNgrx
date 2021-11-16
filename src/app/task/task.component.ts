@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { TaskInterface } from './task.interface';
+import { TaskInterface, TaskList } from './task.interface';
 import * as fromTaskReducer from './task.reducer';
 import * as taskAction from './task.action';
 import { addTask } from './task.action';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss']
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent implements OnInit, OnDestroy {
+
+  unsubscribe$ = new Subject();
+  taskList: TaskInterface[] = [];
 
   constructor(private readonly store: Store<{ task: { taskList: TaskInterface[] } }>) { }
 
@@ -19,8 +24,8 @@ export class TaskComponent implements OnInit {
   }
 
   listenToStore() {
-    this.store.select('task').subscribe(res => {
-      console.log(res);
+    this.store.select('task').pipe(takeUntil(this.unsubscribe$)).subscribe((res: TaskList) => {
+      this.taskList = res.taskList;
     })
   }
 
@@ -34,6 +39,10 @@ export class TaskComponent implements OnInit {
       }
       this.store.dispatch(addTask({ addItem }));
     }
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
   }
 
 }

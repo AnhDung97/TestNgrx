@@ -1,4 +1,12 @@
 <div class="task">
     <h3 class="task__header">To do list</h3>
     <input type="text" class="task__input" placeholder="Input name:" (keyup.enter)="addTask($event.target)">
+    <div class="task__list">
+        <ul>
+            <li *ngFor="let task of taskList">
+                <p>{{task.name}}</p>
+                <input type="checkbox" [checked]="task.status">
+            </li>
+        </ul>
+    </div>
 </div>

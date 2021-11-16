@@ -27,9 +27,9 @@ export class RemoveTask implements Action {
     constructor(public removeItem: any) { }
 }
 
-export class AddTask implements Action {
+export class AddTaskV2 implements Action {
     readonly type = ADD_TASK;
-    constructor(public addItem: any) { };
+    constructor(public addItem: TaskInterface) { };
 }
 
-export type TaskActionType = EditTask | RemoveTask | AddTask;
+export type TaskActionType = EditTask | RemoveTask | AddTaskV2;

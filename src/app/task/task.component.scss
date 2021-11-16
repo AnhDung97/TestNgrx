@@ -1,0 +1,13 @@
+$block: '.task';
+
+#{$block} {
+
+    &__list {
+
+        li {
+            display: flex;
+            align-items: center;
+            border: 1px solid black;
+        }
+    }
+}

@@ -1,8 +1,8 @@
-import { Action, createReducer, on } from "@ngrx/store";
+import { Action, createReducer, on, State } from "@ngrx/store";
 import * as TaskAction from "./task.action";
-import { TaskInterface } from "./task.interface";
+import { TaskInterface, TaskList } from "./task.interface";
 
-export const initState = {
+export const initState: TaskList = {
     taskList: [{
         name: 'To do 1',
         status: false,
@@ -35,13 +35,13 @@ export function taskReducerNew(state: any, action: Action) {
     return _taskReducer(state, action)
 }
 
-export function taskReducer(state = initState, action: TaskAction.TaskActionType) {
+export function taskReducer(state = initState, action: TaskAction.TaskActionType): TaskList {
     switch (action.type) {
-        // case TaskAction.ADD_TASK:
-        //     console.log('add item', action.addItem);
-        //     return {
-        //         ...state
-        //     };
+        case TaskAction.ADD_TASK:
+            // console.log('add item', action.addItem);
+            return {
+                ...state
+            };
         case TaskAction.EDIT_TASK:
 
             return {

@@ -3,3 +3,7 @@ export interface TaskInterface {
     status: boolean;
     date: string;
 }
+
+export interface TaskList {
+    taskList: TaskInterface[]
+}
