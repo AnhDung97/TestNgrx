@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-layout',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor() { }
+  switchTheme: FormGroup = this.renderForm();
+
+  constructor(private readonly fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.renderForm();
+  }
+
+  renderForm() {
+    return this.fb.group({
+      theme: ['']
+    })
   }
 
 }

@@ -1,3 +1,17 @@
 <div class="main-layout">
-    <ng-content></ng-content>
+    <nav class="main-layout__sites-nav">
+        <ul class="main-layout__list">
+            <li class="main-layout__list-item" routerLink="home" routerLinkActive="main-layout__active-link">Home</li>
+            <li class="main-layout__list-item" routerLink="note" routerLinkActive="main-layout__active-link">Notes</li>
+            <li class="main-layout__list-item" routerLink="task" routerLinkActive="main-layout__active-link">Task</li>
+        </ul>
+        <div class="main-layout__switch-theme" [formGroup]="switchTheme">
+            <label for="toggle">Night Mode</label>
+            <tui-toggle id="toggle" formControlName="theme"></tui-toggle>
+        </div>
+
+    </nav>
+    <div class="main-layout__body">
+        <ng-content></ng-content>
+    </div>
 </div>
